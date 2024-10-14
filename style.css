@@ -1,0 +1,91 @@
+
+      body {
+        background-color: bisque;
+      }
+      header {
+        padding-left: 30px;
+        display: flex;
+        flex-direction: row;
+        justify-content: start;
+        align-items: center;
+      }
+      h1 {
+        margin-left: 2px;
+      }
+
+      .gap {
+        height: 2px;
+        background-color: white;
+      }
+      .d {
+        display: flex;
+        justify-content: space-between;
+        align-items: row;
+        font-size: 30px;
+        font-weight: bolder;
+        margin-left: 15%;
+        margin-right: 15%;
+        margin-top: 10px;
+      }
+
+      .income-ex {
+        display: flex;
+        justify-content: space-between;
+        align-items: row;
+        font-size: 30px;
+        margin-left: 15%;
+        margin-right: 15%;
+        margin-top: 10px;
+      }
+      .input {
+        font-size: 15px;
+        padding: 6px 15px;
+        border-radius: 5px;
+        border: 2px solid black;
+        margin-top: 14px;
+      }
+      .btn {
+        padding: 6px 10px;
+        width: 120px;
+        margin-top: 10px;
+        margin-bottom: 30px;
+        margin-left: 25%;
+        border-radius: 8px;
+        cursor: pointer;
+        background-color: green;
+        border: 2px solid black;
+        height: 40px;
+      }
+      #red {
+        background-color: red;
+      }
+      .income {
+        color: green;
+      }
+      .expenditure {
+        color: red;
+      }
+      .incomeAmountShow {
+        color: black;
+        font-size: 25px;
+      }
+      .exx {
+        color: black;
+        font-size: 25px;
+      }
+      .btn:hover {
+        height: 50px;
+        width: 130px;
+      }
+      .clear-btn {
+        padding: 6px 10px;
+        width: 120px;
+        margin-top: 10px;
+        margin-bottom: 30px;
+        margin-left: 25%;
+        border-radius: 8px;
+        cursor: pointer;
+        background-color: red;
+        border: 2px solid black;
+        height: 40px;
+      }

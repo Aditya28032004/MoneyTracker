@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MyWallet</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+      
+    />
+    <link rel="stylesheet" href="style.css">
+    
+  </head>
+  <body>
+    <header>
+      <div>
+        <h1>MyWallet(<span class="total">Total money in wallet</span>)</h1>
+      </div>
+    </header>
+    <div class="income-ex">
+      <div class="Add-income">
+        Add Income <br />
+        <div>
+          <input
+            type="text"
+            class="input"
+            id="IncomeAmount"
+            placeholder="Amount"
+          />
+        </div>
+        <div>
+          <input type="text" class="input" id="IncomeSource" placeholder="Source" />
+        </div>
+        <button class="btn" onclick="toIncome();">ADD</button>
+      </div>
+      <div class="Add-expenditure">
+        Add Expenditure
+        <div>
+          <input type="text" class="input" placeholder="Amount" id="ExpenditureAmount" />
+        </div>
+        <div>
+          <input type="text" class="input" placeholder="Source" id="ExpenditureSource" />
+        </div>
+        <button class="btn" id="red" onclick="toEx();">ADD</button>
+      </div>
+    </div>
+    <div class="gap"></div>
+    <div class="d">
+      <div class="income">
+        Income(<span class="in">0</span>)
+        <div class="incomeAmountShow"></div>
+      </div>
+      <div class="expenditure">
+        Expenditure(<span class="out">0</span>)
+        <div class="exx"></div>
+      </div>
+    </div>
+    <button class="clear-btn" onclick="clearData();">Clear</button>
+    <script src="script.js"></script>
+    
+  </body>
+</html>
