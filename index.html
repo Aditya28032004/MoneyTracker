@@ -3,105 +3,233 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MyWallet - Expense Tracker</title>
+    <title>MyWallet Pro - Financial Manager</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
         <header>
             <div class="app-title">
                 <i class="fas fa-wallet"></i>
-                <h1>MyWallet</h1>
+                <h1>MyWallet Pro</h1>
             </div>
             <button class="theme-toggle" id="themeToggle">
                 <i class="fas fa-moon"></i>
             </button>
         </header>
         
-        <div class="total-balance">
-            <div>TOTAL BALANCE</div>
-            <div class="balance-amount" id="totalBalance">₹0.00</div>
+        <div class="tabs">
+            <div class="tab active" data-tab="dashboard">Dashboard</div>
+            <div class="tab" data-tab="transactions">Transactions</div>
+            <div class="tab" data-tab="debts">Debts</div>
         </div>
         
-        <div class="summary">
-            <div class="summary-card income-card">
-                <div class="summary-title">INCOME</div>
-                <div class="summary-amount income-amount" id="incomeTotal">₹0.00</div>
-            </div>
-            <div class="summary-card expense-card">
-                <div class="summary-title">EXPENSE</div>
-                <div class="summary-amount expense-amount" id="expenseTotal">₹0.00</div>
-            </div>
-        </div>
-        
-        <div class="transaction-section">
-            <div class="transaction-form">
-                <div class="form-header income-header">
-                    <i class="fas fa-arrow-down"></i>
-                    <div class="form-title">Add Income</div>
+        <!-- Dashboard Tab -->
+        <div id="dashboard-tab" class="tab-content active">
+            <div class="dashboard">
+                <div class="summary-card balance-card">
+                    <div class="summary-title">TOTAL BALANCE</div>
+                    <div class="summary-amount" id="totalBalance">₹0.00</div>
                 </div>
-                <div class="form-group">
-                    <label for="incomeAmount">Amount (₹)</label>
-                    <input type="number" class="form-control" id="incomeAmount" placeholder="Enter amount">
+                
+                <div class="summary-card income-card">
+                    <div class="summary-title">INCOME</div>
+                    <div class="summary-amount income-amount" id="incomeTotal">₹0.00</div>
                 </div>
-                <div class="form-group">
-                    <label for="incomeSource">Source</label>
-                    <input type="text" class="form-control" id="incomeSource" placeholder="Salary, Freelance, etc.">
+                
+                <div class="summary-card expense-card">
+                    <div class="summary-title">EXPENSE</div>
+                    <div class="summary-amount expense-amount" id="expenseTotal">₹0.00</div>
                 </div>
-                <div class="form-group">
-                    <label for="incomeCategory">Category</label>
-                    <select class="form-control" id="incomeCategory">
-                        <option value="Salary">Salary</option>
-                        <option value="Freelance">Freelance</option>
-                        <option value="Investment">Investment</option>
-                        <option value="Gift">Gift</option>
-                        <option value="Other">Other</option>
-                    </select>
+                
+                <div class="summary-card owed-to-me-card">
+                    <div class="summary-title">OWED TO ME</div>
+                    <div class="summary-amount owed-to-me-amount" id="owedToMeTotal">₹0.00</div>
                 </div>
-                <button class="btn btn-income" id="addIncomeBtn">
-                    <i class="fas fa-plus"></i> Add Income
-                </button>
+                
+                <div class="summary-card i-owe-card">
+                    <div class="summary-title">I OWE</div>
+                    <div class="summary-amount i-owe-amount" id="ioweTotal">₹0.00</div>
+                </div>
             </div>
             
-            <div class="transaction-form">
-                <div class="form-header expense-header">
-                    <i class="fas fa-arrow-up"></i>
-                    <div class="form-title">Add Expense</div>
+            <div class="transactions">
+                <div class="transactions-header">
+                    <div class="transactions-title">Recent Transactions</div>
                 </div>
-                <div class="form-group">
-                    <label for="expenseAmount">Amount (₹)</label>
-                    <input type="number" class="form-control" id="expenseAmount" placeholder="Enter amount">
+                <div class="transactions-list" id="recentTransactionsList">
+                    <div class="empty-state">
+                        <i class="fas fa-exchange-alt"></i>
+                        <p>No recent transactions</p>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="expenseSource">Description</label>
-                    <input type="text" class="form-control" id="expenseSource" placeholder="Food, Rent, etc.">
+            </div>
+            
+            <div class="transactions">
+                <div class="transactions-header">
+                    <div class="transactions-title">Upcoming Payments</div>
                 </div>
-                <div class="form-group">
-                    <label for="expenseCategory">Category</label>
-                    <select class="form-control" id="expenseCategory">
-                        <option value="Food">Food</option>
-                        <option value="Shopping">Shopping</option>
-                        <option value="Transport">Transport</option>
-                        <option value="Entertainment">Entertainment</option>
-                        <option value="Bills">Bills</option>
-                        <option value="Other">Other</option>
-                    </select>
+                <div class="transactions-list" id="upcomingPaymentsList">
+                    <div class="empty-state">
+                        <i class="fas fa-calendar-check"></i>
+                        <p>No upcoming payments</p>
+                    </div>
                 </div>
-                <button class="btn btn-expense" id="addExpenseBtn">
-                    <i class="fas fa-plus"></i> Add Expense
-                </button>
             </div>
         </div>
         
-        <div class="transactions">
-            <div class="transactions-header">
-                <div class="transactions-title">Recent Transactions</div>
+        <!-- Transactions Tab -->
+        <div id="transactions-tab" class="tab-content">
+            <div class="transaction-section">
+                <div class="transaction-form">
+                    <div class="form-header income-header">
+                        <i class="fas fa-arrow-down"></i>
+                        <div class="form-title">Add Income</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="incomeAmount">Amount (₹)</label>
+                        <input type="number" class="form-control" id="incomeAmount" placeholder="Enter amount">
+                    </div>
+                    <div class="form-group">
+                        <label for="incomeSource">Source</label>
+                        <input type="text" class="form-control" id="incomeSource" placeholder="Salary, Freelance, etc.">
+                    </div>
+                    <div class="form-group">
+                        <label for="incomeCategory">Category</label>
+                        <select class="form-control" id="incomeCategory">
+                            <option value="Salary">Salary</option>
+                            <option value="Freelance">Freelance</option>
+                            <option value="Investment">Investment</option>
+                            <option value="Gift">Gift</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-income" id="addIncomeBtn">
+                        <i class="fas fa-plus"></i> Add Income
+                    </button>
+                </div>
+                
+                <div class="transaction-form">
+                    <div class="form-header expense-header">
+                        <i class="fas fa-arrow-up"></i>
+                        <div class="form-title">Add Expense</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="expenseAmount">Amount (₹)</label>
+                        <input type="number" class="form-control" id="expenseAmount" placeholder="Enter amount">
+                    </div>
+                    <div class="form-group">
+                        <label for="expenseSource">Description</label>
+                        <input type="text" class="form-control" id="expenseSource" placeholder="Food, Rent, etc.">
+                    </div>
+                    <div class="form-group">
+                        <label for="expenseCategory">Category</label>
+                        <select class="form-control" id="expenseCategory">
+                            <option value="Food">Food</option>
+                            <option value="Shopping">Shopping</option>
+                            <option value="Transport">Transport</option>
+                            <option value="Entertainment">Entertainment</option>
+                            <option value="Bills">Bills</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-expense" id="addExpenseBtn">
+                        <i class="fas fa-plus"></i> Add Expense
+                    </button>
+                </div>
             </div>
-            <div class="transactions-list" id="transactionsList">
-                <div class="empty-state">
-                    <i class="fas fa-exchange-alt"></i>
-                    <p>No transactions yet</p>
+            
+            <div class="transactions">
+                <div class="transactions-header">
+                    <div class="transactions-title">All Transactions</div>
+                </div>
+                <div class="transactions-list" id="allTransactionsList">
+                    <div class="empty-state">
+                        <i class="fas fa-exchange-alt"></i>
+                        <p>No transactions yet</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Debts Tab -->
+        <div id="debts-tab" class="tab-content">
+            <div class="transaction-section">
+                <div class="transaction-form">
+                    <div class="form-header owed-to-me-header">
+                        <i class="fas fa-hand-holding-usd"></i>
+                        <div class="form-title">Money Owed to Me</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="owedAmount">Amount (₹)</label>
+                        <input type="number" class="form-control" id="owedAmount" placeholder="Enter amount">
+                    </div>
+                    <div class="form-group">
+                        <label for="owedBy">Owed By</label>
+                        <input type="text" class="form-control" id="owedBy" placeholder="Person's name">
+                    </div>
+                    <div class="form-group">
+                        <label for="owedReason">Reason</label>
+                        <input type="text" class="form-control" id="owedReason" placeholder="Loan, Dinner, etc.">
+                    </div>
+                    <div class="form-group">
+                        <label for="owedDueDate">Due Date</label>
+                        <input type="date" class="form-control" id="owedDueDate">
+                    </div>
+                    <button class="btn btn-owed-to-me" id="addOwedToMeBtn">
+                        <i class="fas fa-plus"></i> Add Debt Owed to Me
+                    </button>
+                </div>
+                
+                <div class="transaction-form">
+                    <div class="form-header i-owe-header">
+                        <i class="fas fa-hand-holding-usd"></i>
+                        <div class="form-title">Money I Owe</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="oweAmount">Amount (₹)</label>
+                        <input type="number" class="form-control" id="oweAmount" placeholder="Enter amount">
+                    </div>
+                    <div class="form-group">
+                        <label for="oweTo">Owed To</label>
+                        <input type="text" class="form-control" id="oweTo" placeholder="Person's name">
+                    </div>
+                    <div class="form-group">
+                        <label for="oweReason">Reason</label>
+                        <input type="text" class="form-control" id="oweReason" placeholder="Loan, Dinner, etc.">
+                    </div>
+                    <div class="form-group">
+                        <label for="oweDueDate">Due Date</label>
+                        <input type="date" class="form-control" id="oweDueDate">
+                    </div>
+                    <button class="btn btn-i-owe" id="addIOweBtn">
+                        <i class="fas fa-plus"></i> Add Money I Owe
+                    </button>
+                </div>
+            </div>
+            
+            <div class="transactions">
+                <div class="transactions-header">
+                    <div class="transactions-title">Money Owed to Me</div>
+                </div>
+                <div class="transactions-list" id="owedToMeList">
+                    <div class="empty-state">
+                        <i class="fas fa-hand-holding-usd"></i>
+                        <p>No debts owed to you</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="transactions">
+                <div class="transactions-header">
+                    <div class="transactions-title">Money I Owe</div>
+                </div>
+                <div class="transactions-list" id="iOweList">
+                    <div class="empty-state">
+                        <i class="fas fa-hand-holding-usd"></i>
+                        <p>You don't owe anyone money</p>
+                    </div>
                 </div>
             </div>
         </div>
